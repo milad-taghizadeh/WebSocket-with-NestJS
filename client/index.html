@@ -17,6 +17,10 @@
 
         socket.on('connect', () => {
             console.log('Connected to server');
+            socket.emit('ping', {message : "Hello Server"})
+            socket.on('pong', (data) => {
+                console.log('Pong received:', data.message);
+            });
         });
 
         socket.on('disconnect', () => {

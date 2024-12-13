@@ -2,9 +2,11 @@ import {
   OnGatewayConnection,
   OnGatewayDisconnect,
   OnGatewayInit,
+  SubscribeMessage,
   WebSocketGateway,
   WebSocketServer,
 } from '@nestjs/websockets';
+import { log } from 'console';
 import { Server } from 'socket.io';
 @WebSocketGateway({ cors: { origin: '*' } })
 export class ChatGateway
@@ -23,5 +25,12 @@ export class ChatGateway
     const { sockets } = this.server.sockets;
     console.log('clientID : ' + client.id + ' disconnected');
     console.log('Online Users : ' + sockets.size);
+  }
+
+  @SubscribeMessage('ping')
+  pingHandler(client: any, data: any) {
+    console.log('Message recived from client with id : ' + client.id);
+    console.log('Data : ' + data.message);
+    client.emit('pong', { message: 'Hello Client!' });
   }
 }

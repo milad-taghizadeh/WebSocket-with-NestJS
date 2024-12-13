@@ -12,7 +12,7 @@ async function bootstrap() {
   const configService = app.get(ConfigService);
   const serverPort = configService.get('App.SERVER_PORT');
   const swaggerEP = configService.get('App.SWAGGER_ENDPOINT');
-  app.useGlobalPipes(new ValidationPipe());
+  // app.useGlobalPipes(new ValidationPipe());
   app.enableCors({
     credentials: true,
     origin: '*',
