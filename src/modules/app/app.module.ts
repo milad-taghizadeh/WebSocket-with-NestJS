@@ -7,7 +7,7 @@ import { CustomConfigModule } from '../config/config.module';
 import { join } from 'path';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TypeOrmConfig } from 'src/config/typeorm.config';
-import { CategoryModule } from '../category/category.module';
+import { ChatGateway } from '../chat/chat.gateway';
 
 @Module({
   imports: [
@@ -19,10 +19,9 @@ import { CategoryModule } from '../category/category.module';
     CustomConfigModule,
     TypeOrmModule.forRoot(TypeOrmConfig()),
     AppModule,
-    CategoryModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, ChatGateway],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
