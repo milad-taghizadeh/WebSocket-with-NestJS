@@ -8,6 +8,8 @@ import { join } from 'path';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TypeOrmConfig } from 'src/config/typeorm.config';
 import { ChatGateway } from '../chat/chat.gateway';
+import { GroupGateway } from '../group/group.gateway';
+import { ChannelGateway } from '../channel/channel.gateway';
 
 @Module({
   imports: [
@@ -21,7 +23,7 @@ import { ChatGateway } from '../chat/chat.gateway';
     AppModule,
   ],
   controllers: [AppController],
-  providers: [AppService, ChatGateway],
+  providers: [AppService, ChatGateway, GroupGateway, ChannelGateway],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
